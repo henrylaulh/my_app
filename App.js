@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, Button} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import ListItem from './src/components/ListItem/ListItem';
 import PlaceInput from './src/components/PlaceInput/PlaceInput';
@@ -37,9 +37,7 @@ export default class App extends Component {
 
     return (
       <View style={styles.container}>
-        <PlaceInput 
-          placeholder="An awesome place" 
-          title="Add"
+        <PlaceInput placeholder="An awesome place" title="Add"
           onPlaceNameChange={this.placeNameChangeHandler}
           onPlaceSubmit={this.placeSubmitHandler}
         />
