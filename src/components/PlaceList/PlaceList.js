@@ -3,7 +3,9 @@ import { View, StyleSheet } from 'react-native';
 
 import ListItem from '../ListItem/ListItem';
 
-const listItemContainer = (props) => (
+// functional component
+// no state needed to manage
+const PlaceList = props => (
 
     <View style={styles.listContainer}>
         {props.places.map((place, i) => (
@@ -18,4 +20,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default listItemContainer;
+export default PlaceList;
