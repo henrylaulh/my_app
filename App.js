@@ -1,23 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TextInput, Button} from 'react-native';
+import {StyleSheet, Text, View, TextInput, Button} from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import ListItem from './src/components/ListItem/ListItem';
+import Input from './src/components/Input/Input';
+import ListItemContainer from './src/components/ListItemContainer/ListItemContainer';
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
 
   state = {
     placeName : '',
@@ -47,13 +35,13 @@ export default class App extends Component<Props> {
 
   render() {
     
-    const placesOutput = this.state.places.map((place, i) => (
-      <Text key={i}>{place}</Text>
-    ));
+    // const placesOutput = this.state.places.map((place, i) => (
+    //   <ListItem key={i} placeName={place} />
+    // ));
 
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
+        {/* <View style={styles.inputContainer}>
           <TextInput 
             style={styles.placeInput}
             placeholder="An awesome place"
@@ -61,8 +49,10 @@ export default class App extends Component<Props> {
             onChangeText={this.placeNameChangeHandler}
           />
           <Button style={styles.placeButton} title="Add" onPress={this.placeSubmitHandler} />
-        </View>
-        <View>{placesOutput}</View>
+        </View> */}
+        <Input placeholder="An awesome place" title="Add" />
+        <ListItemContainer places={this.state.places} />
+        {/* <View style={styles.listContainer}>{placesOutput}</View> */}
       </View>
     );
   }
@@ -88,5 +78,8 @@ const styles = StyleSheet.create({
   },
   placeButton:{
     width: "30%"
+  },
+  listContainer:{
+    width:"100%",
   }
 });
