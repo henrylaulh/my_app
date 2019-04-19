@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import ListItem from './src/components/ListItem/ListItem';
 import PlaceInput from './src/components/PlaceInput/PlaceInput';
 import PlaceList from './src/components/PlaceList/PlaceList';
+
+// Import image like this will auto update its source path when its on different devices
+import placeImage from './src/assets/images/beautiful-place.jpg';
 
 export default class App extends Component {
 
@@ -21,6 +23,9 @@ export default class App extends Component {
     })
   }
 
+
+
+
   placeSubmitHandler = val => {
     if(this.state.placeName.trim() === ""){
       return;
@@ -28,20 +33,41 @@ export default class App extends Component {
 
     this.setState(prevState => {
       return {
-        places: prevState.places.concat(prevState.placeName)
+        places: prevState.places.concat(
+          {
+            key: Math.random().toString(), 
+            name: prevState.placeName,
+            image: placeImage
+          }
+        )
       };
     });
   }
 
-  render() {
 
+
+
+  placeDeletedHandler = key => {
+    this.setState(prevState => {
+      return {
+        places: prevState.places.filter(place => {
+          return place.key !== key;
+        })
+      };
+    });
+  }
+
+
+
+
+  render() {
     return (
       <View style={styles.container}>
         <PlaceInput placeholder="An awesome place" title="Add"
           onPlaceNameChange={this.placeNameChangeHandler}
           onPlaceSubmit={this.placeSubmitHandler}
         />
-        <PlaceList places={this.state.places} />
+        <PlaceList places={this.state.places} onItemDeleted={this.placeDeletedHandler}/>
       </View>
     );
   }

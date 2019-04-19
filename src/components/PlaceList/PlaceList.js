@@ -1,20 +1,24 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 
 import ListItem from '../ListItem/ListItem';
 
 // functional component
 // no state needed to manage
-const PlaceList = props => (
+const PlaceList = props => {
 
-    <View style={styles.listContainer}>
-        {props.places.map((place, i) => (
-            <ListItem key={i} placeName={place} 
-                onItemPressed={() => alert("Item pressed - ID: " + i) }
-            />
-        ))}
-    </View>
-);
+    return (
+        <FlatList style={styles.listContainer} 
+            data={props.places} 
+            renderItem={(info) => (
+                <ListItem 
+                    placeName={info.item.name} 
+                    placeImage={info.item.image}
+                    onItemPressed={() => props.onItemDeleted(info.item.key)}/>
+            )} 
+        />
+    );
+};
 
 const styles = StyleSheet.create({
     listContainer:{
